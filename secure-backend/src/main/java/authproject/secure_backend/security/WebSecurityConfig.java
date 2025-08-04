@@ -15,6 +15,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import authproject.secure_backend.filter.JWTFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -23,17 +26,19 @@ public class WebSecurityConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private JWTFilter jwtFilter;
+	
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	http.csrf(csrf -> csrf.disable())
-    	    .exceptionHandling((exception) -> exception.authenticationEntryPoint(null))
-    	    .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-    	    .httpBasic(Customizer.withDefaults())
-    	    .authorizeHttpRequests(auth -> 
-    	    auth
-    	    .requestMatchers("/auth/test/register", "/auth/test/login").permitAll()
-    	    .anyRequest().authenticated());
-		return http.build();
+    	return http.csrf(customizer -> customizer.disable()).
+                authorizeHttpRequests(request -> request
+                        .requestMatchers("login", "register").permitAll()
+                        .anyRequest().authenticated()).
+                httpBasic(Customizer.withDefaults()).
+                sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
 	}
 
 
