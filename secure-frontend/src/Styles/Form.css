@@ -1,0 +1,8 @@
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    box-shadow: 3px 3px rgba(83, 83, 83, 0.3);
+}
