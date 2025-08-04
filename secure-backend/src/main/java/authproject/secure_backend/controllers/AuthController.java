@@ -1,13 +1,13 @@
 package authproject.secure_backend.controllers;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import authproject.secure_backend.security.request.LoginRequest;
+import authproject.secure_backend.entity.User;
+import authproject.secure_backend.service.UserService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
-@RequestMapping("/babis/test")
+@RequestMapping("/auth/test")
 public class AuthController {
 
+	
+	@Autowired
+	private UserService service;
 	
 	@GetMapping("/all")
 	public String allAccess() {
@@ -30,15 +33,8 @@ public class AuthController {
 	    return "User Content.";
 	}
 	
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-		
-		if ("user".equals(request.getUsername()) && "password".equals(request.getPassword()) ) {
-			return ResponseEntity.ok(null);
-		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-		}
-		
-		
+	@PostMapping("/register")
+	public User register(@RequestBody User user) {
+		return service.register(user);
 	}
 }
