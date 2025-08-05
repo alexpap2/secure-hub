@@ -33,7 +33,8 @@ public class UserService {
 	
 	public String verify(User user) {
 		Authentication authentication = 
-				authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+				authManager.authenticate(new UsernamePasswordAuthenticationToken(
+						user.getUsername(), user.getPassword()));
 		
 		if (authentication.isAuthenticated()) {
 			return jwtService.getToken(user.getUsername());

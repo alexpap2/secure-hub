@@ -1,6 +1,6 @@
 import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Components/Login';
+import Register from './Components/Register';
 // import axios from 'axios';
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
   return (
     <>
       <Login />
+      <Register />
     </>
   )
 }

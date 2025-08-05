@@ -5,7 +5,7 @@ export default function Login() {
 
     function handleLogin(formdata: FormData) {
       const data = Object.fromEntries(formdata);
-      axios.post('http://localhost:8080/auth/test/login', {
+      axios.post('http://localhost:8080/auth/test/register', {
         username: data.username,
         password: data.password
       })
@@ -17,7 +17,8 @@ export default function Login() {
         }
       })
       .catch(function (error) {
-        alert('Wrong Username or Password!');
+        alert('Error on the backend most likely');
+        alert(error);
         console.log(error);
       });
         
@@ -27,12 +28,12 @@ export default function Login() {
         <div className="container">
           <form action={handleLogin}>
             <div className="formDiv">
-              <h1>Log in</h1>
+              <h1>Register</h1>
               <label>Username</label>
               <input type = "text" name = "username" required />
               <label>Password</label>
               <input type="text" name="password" required />
-              <button type="submit">Log in</button>
+              <button type="submit">Sign Up</button>
             </div>
           </form>
         </div>
