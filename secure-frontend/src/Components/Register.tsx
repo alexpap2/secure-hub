@@ -25,7 +25,7 @@ export default function Login() {
     }
 
     return (
-        <div className="container">
+        <div className="formContainer">
           <form action={handleLogin}>
             <div className="formDiv">
               <h1>Register</h1>

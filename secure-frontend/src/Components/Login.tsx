@@ -10,7 +10,7 @@ export default function Login() {
         password: data.password
       })
       .then(function (response) {
-        // localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data);
         if (response.data !== '') {
           alert(response.data);
           //do sth
@@ -24,7 +24,7 @@ export default function Login() {
     }
 
     return (
-        <div className="container">
+        <div className="formContainer">
           <form action={handleLogin}>
             <div className="formDiv">
               <h1>Log in</h1>
