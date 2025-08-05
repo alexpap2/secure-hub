@@ -15,7 +15,6 @@ export default function Login() {
       .then(function (response) {
         localStorage.setItem("token", response.data);
         if (response.data !== '') {
-            alert(response.data);
             navigate(-1);
         }
       })

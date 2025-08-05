@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import authproject.secure_backend.entity.User;
+import authproject.secure_backend.service.JWTService;
 import authproject.secure_backend.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,9 @@ public class AuthController {
 	
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private JWTService jwtService;
 	
 	@GetMapping("/all")
 	public String allAccess() {
@@ -44,7 +49,8 @@ public class AuthController {
 	}
 	
 	@GetMapping("/resource")
-	public String message() {
-		return "if you can see this, you are logged in!";
+	public String message(HttpServletRequest request) {
+		String authheaderString = request.getHeader("Authorization").substring(7);
+		return jwtService.extractUserName(authheaderString);
 	}
 }
