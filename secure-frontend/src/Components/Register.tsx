@@ -1,7 +1,10 @@
 import axios from "axios"
 import "../Styles/Form.css"
+import { useNavigate } from "react-router";
 
 export default function Login() {
+
+    let navigate = useNavigate();
 
     function handleLogin(formdata: FormData) {
       const data = Object.fromEntries(formdata);
@@ -10,10 +13,10 @@ export default function Login() {
         password: data.password
       })
       .then(function (response) {
-        // localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data);
         if (response.data !== '') {
-          alert(response.data);
-          //do sth
+            alert(response.data);
+            navigate(-1);
         }
       })
       .catch(function (error) {

@@ -1,7 +1,22 @@
 import { Link } from "react-router"
 import "../Styles/Home.css"
+import axios from "axios";
 
 export default function Home() {
+
+    function handleResource(event: React.MouseEvent<HTMLAnchorElement, MouseEvent> ) {
+        event.preventDefault();
+        axios.get("http://localhost:8080/auth/test/resource", {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+        })
+        .then(() => {
+            window.location.href = "https://ia801700.us.archive.org/11/items/rick-astley-never-gonna-give-you-up-video_202011/Rick%20Astley%20-%20Never%20Gonna%20Give%20You%20Up%20%28Video%29.mp4";
+        })
+        .catch(error => alert('not logged in!! you got error ' + error))
+    }
+    
 
     return (
         <div className="container">
@@ -17,6 +32,18 @@ export default function Home() {
                     <div className="top-right-part">
                         <Link to="/register">Register</Link>
                     </div>
+                </div>
+            </div>
+            <div className="bottom-part">
+                <div className="arrow">
+                    <p>⬇</p>
+                </div>
+                <div className="headers">
+                    <h1>Built with Spring Security<br />for Maximum Protection</h1>
+                    <h1>and React + TypeScript<br /> for Easy Scalability</h1>
+                </div>                    
+                <div className="protected-resource">
+                    <h1>all to protect <a href="" onClick={handleResource}>this</a> resource</h1>
                 </div>
             </div>
         </div>

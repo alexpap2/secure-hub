@@ -2,6 +2,7 @@
 
 body {
     margin:0;
+    overflow-x: hidden;
 }
 .container {
     width: 100vh;
@@ -13,7 +14,7 @@ body {
 
 .top-part {
     width:100vw;
-    height: 80vh;
+    height: 90vh;
     background-image: url(../assets/crazy.jpg);
     place-items: center;
 }
@@ -47,7 +48,7 @@ body {
 }
 
 .nav {
-    margin-top: 10vh;
+    margin-top: 15vh;
     display: flex;
     flex-direction: row;
     gap: 40vh;
@@ -68,3 +69,34 @@ body {
 .nav a:hover {
     background-color:rgb(127, 203, 209);
 }
+
+/* bottom part */
+
+.bottom-part {
+    color:rgb(255, 255, 255);
+    background-color: #378f93;
+    width: 100vw;
+}
+
+.arrow {
+    width: 100vw;
+    height: 10vh;
+}
+
+.arrow p {
+    font-size: 50px;
+    margin-top:0;
+    margin-left: 47vw;
+}
+
+.headers {
+    display: flex;
+    flex-direction: row;
+    gap: 27vw;
+    margin-left: 8vw;
+}
+
+.protected-resource {
+    margin-left: 34vw;
+}
+

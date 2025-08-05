@@ -24,11 +24,11 @@ public class UserService {
 	@Autowired
 	AuthenticationManager authManager;
 	
-	public User register(User user) {
+	public String register(User user) {
 		
 		user.setPassword(encoder.encode(user.getPassword()));
-		
-		return repository.save(user);
+		repository.save(user);
+		return jwtService.getToken(user.getUsername());
 	}
 	
 	public String verify(User user) {

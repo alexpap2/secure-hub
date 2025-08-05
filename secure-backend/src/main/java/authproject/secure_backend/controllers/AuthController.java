@@ -34,12 +34,17 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")
-	public User register(@RequestBody User user) {
+	public String register(@RequestBody User user) {
 		return service.register(user);
 	}
 	
 	@PostMapping("/login")
 	public String login(@RequestBody User user) {
 		return service.verify(user);
+	}
+	
+	@GetMapping("/resource")
+	public String message() {
+		return "if you can see this, you are logged in!";
 	}
 }
