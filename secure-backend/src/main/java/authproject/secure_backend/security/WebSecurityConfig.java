@@ -51,9 +51,10 @@ public class WebSecurityConfig {
 	}
 
 
+    @SuppressWarnings("deprecation")
     @Bean
     AuthenticationProvider authProvider() {
-    	DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
     	 provider.setPasswordEncoder(new BCryptPasswordEncoder(10));
 //    	 provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
     	provider.setUserDetailsService(userDetailsService);
